@@ -5,6 +5,10 @@ function Background () {
   return(
     <div className="outer-background">
   <div className="inner-background">
+
+    <button class="upgrade-btn">
+      Upgrade
+    </button>
     <Input />
   </div>
   
