@@ -3,21 +3,27 @@ import { FaMicrophone } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from 'react';
 import { askGemini } from "../services/API";
-function Input(){
+function Input({ messages, setMessages, loading, setLoading }){
+
   const [query, setQuery] = useState("");
     const [modelOpen, setModelOpen] = useState(false);
 
     
   const handleSubmit = async () => {
     if (!query.trim()) return;
+ const userMsg = { role: "user", text: query };
+  setMessages((prev) => [...prev, userMsg]);
+  setQuery("");
+  setLoading(true);
     try {
-      const response = await askGemini(query);
-      console.log("User:", query);
-      console.log("Gemini:", response);
-    } catch (error) {
-      console.error("Gemini API Errors:", error);
-    }
-    setQuery("");
+    const response = await askGemini(query);
+    setMessages((prev) => [...prev, { role: "ai", text: response }]);
+  } catch (error) {
+    console.error("Gemini API Errors:", error);
+    setMessages((prev) => [...prev, { role: "ai", text: "Error, try again." }]);
+  } finally {
+    setLoading(false);
+  }
   };
 
   const handleKeyDown = (e) => {
@@ -30,8 +36,23 @@ function Input(){
      
 
 
-    <div className="main-area">
-    <p>Hi, Shankar. What's on your mind?</p>
+    <div className="chat-wrapper">
+   {messages.length === 0 && <p className="greeting">Hi, Shankar. What's on your mind?</p>}
+
+<div className="chat-window">
+  {messages.map((msg, i) => (
+    <div key={i} className={`chat-row ${msg.role}`}>
+    <div className={`chat-bubble ${msg.role}`}>
+      {msg.text}
+    </div>
+    </div>
+  ))}
+  {loading &&(
+    <div className="chat-row ai">
+    <div className="chat-bubble ai">Typing...</div>
+</div>
+  
+)}
    <div class="search-bar">
   <button class="icon-btn">+</button>
   <input placeholder="Ask Gemini" 
@@ -51,6 +72,7 @@ function Input(){
   <button class="icon-btn"><FaMicrophone /></button>
 </div>
     </div>
+ </div>
   )
 }
 

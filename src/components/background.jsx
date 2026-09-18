@@ -1,6 +1,6 @@
 import Input from "./input";
 
-function Background () {
+function Background ({ messages, setMessages, loading, setLoading }) {
 
   return(
     <div className="outer-background">
@@ -9,7 +9,12 @@ function Background () {
     <button class="upgrade-btn">
       Upgrade
     </button>
-    <Input />
+    <Input
+     messages={messages}
+  setMessages={setMessages}
+  loading={loading}
+  setLoading={setLoading}
+    />
   </div>
   
     </div>
