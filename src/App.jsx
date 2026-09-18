@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Background from './components/background';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-   <h1>gemini clone</h1>
-   
+   <div className="app">
+     
+   <Background />
+   </div>
   )
 }
 
