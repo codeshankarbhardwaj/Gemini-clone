@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 700px;
-  /* height: 100vh; */
+  height: 100vh;
   margin: 0 auto;
   padding: 70px 16px 24px;
   box-sizing: border-box;
@@ -59,10 +59,16 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-y: auto;
   gap: 16px;
   padding-bottom: 20px;
+   scrollbar-width: none;
+}
+
+.chat-window::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 .greeting {
@@ -106,7 +112,35 @@
 }
 
 .chat-bubble p {
-  margin: 0 0 8px 0;
+  margin: 0 0 10px 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.chat-bubble h1,
+.chat-bubble h2,
+.chat-bubble h3,
+.chat-bubble h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 14px 0 8px 0;
+  color: #E8EAED;
+}
+
+.chat-bubble strong {
+  font-weight: 600;
+}
+
+.chat-bubble li {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.chat-bubble hr {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 12px 0;
 }
 
 .chat-bubble ul, .chat-bubble ol {
@@ -128,6 +162,24 @@
   border-radius: 8px;
   overflow-x: auto;
   margin: 6px 0;
+}
+
+.chat-bubble table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.chat-bubble th, .chat-bubble td {
+  border: 1px solid #333;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.chat-bubble th {
+  background-color: #1a1a1a;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {

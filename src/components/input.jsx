@@ -3,6 +3,11 @@ import { FaMicrophone } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from 'react';
 import { askGemini } from "../services/API";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
+
+
 function Input({ messages, setMessages, loading, setLoading }){
 
   const [query, setQuery] = useState("");
@@ -43,7 +48,11 @@ function Input({ messages, setMessages, loading, setLoading }){
   {messages.map((msg, i) => (
     <div key={i} className={`chat-row ${msg.role}`}>
     <div className={`chat-bubble ${msg.role}`}>
-      {msg.text}
+       {msg.role === "ai" ? (
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.text}</ReactMarkdown>
+      ) : (
+        msg.text
+      )}
     </div>
     </div>
   ))}
