@@ -42,7 +42,10 @@ function Input({ messages, setMessages, loading, setLoading }){
 
 
     <div className="chat-wrapper">
-   {messages.length === 0 && <p className="greeting">Hi, Shankar. What's on your mind?</p>}
+   {messages.length === 0 &&
+    <div className="greeting-wrapper">
+   <p className="greeting">Hi, Shankar. What's on your mind?</p>
+    </div>}
 
 <div className="chat-window">
   {messages.map((msg, i) => (
